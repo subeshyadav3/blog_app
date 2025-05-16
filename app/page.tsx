@@ -1,10 +1,15 @@
+import { HeroSection } from "./components/home/hero-section";
+import Navbar from "./components/home/nav"
 
-export default function DashboardPage() {
+export default function Homepage() {
  
 
   return (
     <div>
-      <h1>Welcome to Homepage!</h1>
+      <Navbar />
+      <HeroSection />
+
+        <h1></h1>
     </div>
   );
 }

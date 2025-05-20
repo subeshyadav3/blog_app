@@ -1,11 +1,16 @@
+"use client";
 import { Button } from "@/components/ui/button"
 import { ImageSlider } from "./image-slider"
 import { Badge } from "@/components/ui/badge"
 import Link from "next/link"
 
 export function HeroSection() {
+    const handleSubscribe = () => {
+      
+        alert("Subscribed!");
+    }
     return (
-        <section className="w-full py-12 md:py-16 lg:py-20 border-b">
+        <section className="w-full py-12 md:py-16 lg:py-20 ">
             <div className="container px-4 md:px-6">
                 <div className="flex flex-col gap-8 md:gap-12">
                     <div className="flex flex-col items-center text-center space-y-4 max-w-3xl mx-auto">
@@ -23,9 +28,9 @@ export function HeroSection() {
                                 <Button>Latest Articles</Button>
                             </Link>
 
-                            <Link href="/subscribe">
-                                <Button variant="outline">Subscribe</Button>
-                            </Link>
+                            
+                                <Button variant="outline" onClick={handleSubscribe}>Subscribe</Button>
+                            
                         </div>
                     </div>
 
@@ -38,7 +43,7 @@ export function HeroSection() {
                             <ImageSlider />
                         </div>
                         <div className="flex justify-between items-center mt-4 text-sm text-muted-foreground">
-                            <p>Showing 5 of 24 featured articles</p>
+                            <p>Showing 3 of 12 featured articles</p>
                             <Button variant="link" size="sm" className="font-medium">
                                 View all articles →
                             </Button>

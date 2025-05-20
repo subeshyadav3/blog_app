@@ -10,7 +10,7 @@ export default function PostSignupPage() {
   useEffect(() => {
     const syncUser = async () => {
       if (!user) return;
-
+      console.log("User data:", user);  
       const response=await fetch("/api/sync-user", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -22,6 +22,7 @@ export default function PostSignupPage() {
           role: user.publicMetadata?.role || "user",
         }),
       });
+
       console.log("Response from sync-user:", response);
       router.push("/"); 
     };

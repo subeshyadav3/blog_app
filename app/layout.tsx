@@ -5,6 +5,8 @@ import {
   ClerkProvider,
 
 } from '@clerk/nextjs'
+import Footer from "./components/footer/page";
+import Navbar from "./components/home/nav";
 
 
 const geistSans = Geist({
@@ -29,14 +31,16 @@ export default function RootLayout({
 }>) {
   return (
     <ClerkProvider>
-    <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        {/* <Navbar /> */}
-        {children}
-      </body>
-    </html>
+      <html lang="en">
+        <body
+          className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        >
+          <Navbar />
+          {children}
+          <Footer />
+
+        </body>
+      </html>
     </ClerkProvider>
   );
 }

@@ -7,40 +7,27 @@ export function ImageSlider() {
   const featuredPosts = [
     {
       id: 1,
-      title: "The Future of Web Development",
-      category: "Technology",
-      date: "May 12, 2025",
-      image: "/placeholder.svg?height=400&width=600",
+      title: "Nothing Phone (3a) Pro review:",
+      category: "mobile",
+      date: "May 20, 2025",
+      image: "https://cdn.gadgetbytenepal.com/wp-content/uploads/2025/04/Nothing-Phone-3a-Pro-Design.jpg",
     },
     {
       id: 2,
-      title: "Understanding Modern JavaScript",
-      category: "Programming",
-      date: "May 10, 2025",
-      image: "/placeholder.svg?height=400&width=600",
+      title: "Honor X8C Review:",
+      category: "mobile",
+      date: "May 20, 2025",
+      image: "https://cdn.gadgetbytenepal.com/wp-content/uploads/2025/04/Honor-X8c-Design.jpg",
     },
     {
       id: 3,
-      title: "Designing for Accessibility",
-      category: "Design",
-      date: "May 8, 2025",
-      image: "/placeholder.svg?height=400&width=600",
-    },
-    {
-      id: 4,
-      title: "The Rise of AI in Content Creation",
-      category: "Artificial Intelligence",
-      date: "May 5, 2025",
-      image: "/placeholder.svg?height=400&width=600",
-    },
-    {
-      id: 5,
-      title: "Building Sustainable Digital Products",
-      category: "Sustainability",
-      date: "May 2, 2025",
-      image: "/placeholder.svg?height=400&width=600",
-    },
+      title: "Nothing Phone (3a) Pro review:",
+      category: "mobile",
+      date: "May 20, 2025",
+      image: "https://cdn.gadgetbytenepal.com/wp-content/uploads/2025/04/Nothing-Phone-3a-Pro-Design.jpg",
+    }
   ]
+
 
   return (
     <Carousel className="w-full">

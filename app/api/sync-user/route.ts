@@ -4,7 +4,7 @@ import prisma from "@/app/lib/prisma";
 export async function POST(request: Request) {
     try {
         const { clerkId, email, name, imageUrl, role } = await request.json();
-
+        console.log("Received data:", { clerkId, email, name, imageUrl, role });
         if (!clerkId || !email) {
             return NextResponse.json({ error: "Missing required fields." }, { status: 400 });
         }

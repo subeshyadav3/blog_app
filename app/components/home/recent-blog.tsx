@@ -1,11 +1,10 @@
 "use client";
-import { Button } from '@/components/ui/button';
-import { Badge } from '@/components/ui/badge';
+
 import React, { useState, useEffect } from 'react'
 import ArticleCard from '../articles/article-card';
 
 function RecentBlog() {
-    const [blog, setBlog] = useState([])
+    const [blog, setBlog] = useState(null)
     const [page, setPage] = useState(1)
     const [loading, setLoading] = useState(true)
 
@@ -24,7 +23,7 @@ function RecentBlog() {
         }
     }, [])
     const handlePageChange = (newPage) => {
-        if (newPage >= 1 && newPage <= Math.ceil(blog.length / 6)) {
+        if (newPage >= 1 && newPage <= Math.ceil(blog?.length / 6)) {
             setPage(newPage)
         }
     }
@@ -33,8 +32,8 @@ function RecentBlog() {
             <div className='container px-4 md:px-6'>
                 <h1 className='border-b-2 border-purple-300 bg-gradient-to-t bg-purple-100 to-purple-50 p-2 font-bold font-serif text-xl'>Recent Blogs</h1>
                 <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-4  '>
-                    {!loading
-                        ? blog.slice((page - 1) * 6, page * 6).map((item) => (
+                    {(!loading
+                        && Array.isArray(blog)) ? (blog.slice((page - 1) * 6, page * 6).map((item) => (
                             <ArticleCard
                                 key={item.id}
                                 id={item.id}
@@ -44,7 +43,7 @@ function RecentBlog() {
                                 featuredImage={item.featuredImage}
                             />
                           
-                ))
+                )))
                 : Array.from({length: 6 }).map((_, index) => (
                 <div key={index} className="shadow-lg rounded-t-lg mt-10 animate-pulse w-full py-2">
                     <div className="h-32 bg-gray-300 rounded-t-lg" />
@@ -71,10 +70,10 @@ function RecentBlog() {
                 >
                     Prev
                 </button>
-                <span className="text-lg font-bold">{page} / {Math.max(1, Math.ceil(blog.length / 6))}</span>
+                <span className="text-lg font-bold">{page} / {Math.max(1, Math.ceil(blog?.length / 6)) || 1}</span>
                 <button
                     onClick={() => handlePageChange(page + 1)}
-                    disabled={page === Math.ceil(blog.length / 6)}
+                    disabled={page === Math.ceil(blog?.length / 6)}
                     className="px-4 py-1 bg-gray-300 text-gray-600 rounded-md hover:bg-gray-400 disabled:opacity-50"
                 >
                     Next

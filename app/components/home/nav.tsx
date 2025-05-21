@@ -46,6 +46,7 @@ export default function Navbar() {
 
         <div className="hidden sm:flex items-center gap-4">
           <SignedIn>
+          <Link href='/dashboard' className="text-gray-600">Dashboard</Link>
             <UserButton afterSignOutUrl="/" />
           </SignedIn>
           <SignedOut>
@@ -86,6 +87,7 @@ export default function Navbar() {
           </Link>
 
           <SignedIn>
+            <Link href='/dashboard' className="text-gray-600 hover:text-black">Dashboard</Link>
             <UserButton afterSignOutUrl="/" />
           </SignedIn>
 

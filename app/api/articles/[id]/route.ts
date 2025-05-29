@@ -1,10 +1,11 @@
 import prisma from "@/app/lib/prisma";
 import { NextRequest, NextResponse } from "next/server";
 
-export async function GET(request: NextRequest) {
-  const { pathname } = new URL(request.url);
-  const parts = pathname.split("/");
-  const id = parts[parts.length - 1];
+export async function GET(
+  req: NextRequest,
+  context: { params: { id: string } }
+) {
+  const id = context.params.id;
 
   try {
     const article = await prisma.articles.findUnique({
@@ -24,11 +25,12 @@ export async function GET(request: NextRequest) {
   }
 }
 
-export async function PUT(request: NextRequest) {
-  const { pathname } = new URL(request.url);
-  const parts = pathname.split("/");
-  const id = parts[parts.length - 1];
-  const data = await request.json();
+export async function PUT(
+  req: NextRequest,
+  context: { params: { id: string } }
+) {
+  const id = context.params.id;
+  const data = await req.json();
 
   try {
     const article = await prisma.articles.update({
@@ -45,10 +47,11 @@ export async function PUT(request: NextRequest) {
   }
 }
 
-export async function DELETE(request: NextRequest) {
-  const { pathname } = new URL(request.url);
-  const parts = pathname.split("/");
-  const id = parts[parts.length - 1];
+export async function DELETE(
+  req: NextRequest,
+  context: { params: { id: string } }
+) {
+  const id = context.params.id;
 
   try {
     const article = await prisma.articles.delete({

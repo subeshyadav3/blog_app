@@ -1,4 +1,6 @@
 import prisma from "@/app/lib/prisma";
+import { auth, currentUser } from "@clerk/nextjs/server";
+import { PrismaClient } from "@prisma/client";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(request: NextRequest) {
@@ -14,10 +16,12 @@ export async function GET(request: NextRequest) {
 }
 
 export async function POST(request: NextRequest) {
-  const user = await prisma.user.findUnique({
-    where: {
-      email: "subeshgaming@gmail.com",
-    },
+
+  const user = await currentUser();
+  const userExist=await prisma.user.findUnique({
+    where:{
+      email: user?.emailAddresses[0].emailAddress
+    }
   });
 
   try {
@@ -29,7 +33,7 @@ export async function POST(request: NextRequest) {
         content: article.content,
         category: article.category,
         featuredImage: article.featuredImage,
-        authorId: user?.id || article.authorId,
+        authorId: userExist?.id || article.authorId,
       },
     });
 

@@ -30,7 +30,7 @@ function RecentBlog() {
     return (
         <section className="w-full py-5 md:py-10  border-b max-w-5xl mx-auto">
             <div className='container px-4 md:px-6'>
-                <h1 className='border-b-2 border-purple-300 bg-gradient-to-t bg-purple-100 to-purple-50 p-2 font-bold font-serif text-xl'>Recent Blogs</h1>
+                <h1 className='outline-offset-1 border-t-2 border-l-3 border-1 border-slate-200    shadow-sm p-2 font-bold font-serif text-xl'>Recent Blogs</h1>
                 <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-4  '>
                     {(!loading
                         && Array.isArray(blog)) ? (blog.slice((page - 1) * 6, page * 6).map((item) => (

@@ -21,6 +21,7 @@ export default function CreateArticle() {
   const [formData, setFormData] = useState({
     title: "",
     excerpt: "",
+    featuredImage: "",
     content: "",
     category: "",
     status: "draft",
@@ -39,22 +40,19 @@ export default function CreateArticle() {
     e.preventDefault()
     setIsSubmitting(true)
     setError(null)
-
+    console.log("Submitting article:", formData)
     try {
       const response = await fetch("/api/articles", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({
-          ...formData,
-          author: "Admin", // You might want to get this from authentication
-          createdAt: new Date().toISOString(),
-          updatedAt: new Date().toISOString(),
-        }),
+        body: JSON.stringify(formData),
       })
+      alert("Article created successfully! Redirecting to dashboard...")
 
       if (!response.ok) {
+      alert("Failed to create article. Please try again.")
         throw new Error("Failed to create article")
       }
 
@@ -99,6 +97,18 @@ export default function CreateArticle() {
                 name="title"
                 placeholder="Enter article title"
                 value={formData.title}
+                onChange={handleChange}
+                required
+              />
+            </div>
+
+            <div className="space-y-2">
+            <Label htmlFor="title">Featured Image</Label>
+              <Input
+                id="featuredImage"
+                name="featuredImage"
+                placeholder="Enter article image link"
+                value={formData.featuredImage}
                 onChange={handleChange}
                 required
               />

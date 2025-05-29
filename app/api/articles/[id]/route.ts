@@ -1,11 +1,8 @@
 import prisma from "@/app/lib/prisma";
 import { NextRequest, NextResponse } from "next/server";
 
-export async function GET(
-  req: NextRequest,
-  context: { params: { id: string } }
-) {
-  const id = context.params.id;
+export async function GET(request: NextRequest, { params }: { params: { id: string } }) {
+  const id = params.id;
 
   try {
     const article = await prisma.articles.findUnique({
@@ -17,20 +14,14 @@ export async function GET(
     }
 
     return NextResponse.json(article, { status: 200 });
-  } catch (error) {
-    return NextResponse.json(
-      { message: "Internal Server Error" },
-      { status: 500 }
-    );
+  } catch {
+    return NextResponse.json({ message: "Internal Server Error" }, { status: 500 });
   }
 }
 
-export async function PUT(
-  req: NextRequest,
-  context: { params: { id: string } }
-) {
-  const id = context.params.id;
-  const data = await req.json();
+export async function PUT(request: NextRequest, { params }: { params: { id: string } }) {
+  const id = params.id;
+  const data = await request.json();
 
   try {
     const article = await prisma.articles.update({
@@ -39,19 +30,13 @@ export async function PUT(
     });
 
     return NextResponse.json(article, { status: 200 });
-  } catch (error) {
-    return NextResponse.json(
-      { message: "Internal Server Error" },
-      { status: 500 }
-    );
+  } catch {
+    return NextResponse.json({ message: "Internal Server Error" }, { status: 500 });
   }
 }
 
-export async function DELETE(
-  req: NextRequest,
-  context: { params: { id: string } }
-) {
-  const id = context.params.id;
+export async function DELETE(request: NextRequest, { params }: { params: { id: string } }) {
+  const id = params.id;
 
   try {
     const article = await prisma.articles.delete({
@@ -59,10 +44,7 @@ export async function DELETE(
     });
 
     return NextResponse.json(article, { status: 200 });
-  } catch (error) {
-    return NextResponse.json(
-      { message: "Internal Server Error" },
-      { status: 500 }
-    );
+  } catch {
+    return NextResponse.json({ message: "Internal Server Error" }, { status: 500 });
   }
 }

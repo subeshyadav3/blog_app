@@ -16,12 +16,11 @@ export async function GET(request: NextRequest) {
 }
 
 export async function POST(request: NextRequest) {
-
   const user = await currentUser();
-  const userExist=await prisma.user.findUnique({
-    where:{
-      email: user?.emailAddresses[0].emailAddress
-    }
+  const userExist = await prisma.user.findUnique({
+    where: {
+      email: user?.emailAddresses[0].emailAddress,
+    },
   });
 
   try {

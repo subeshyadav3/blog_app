@@ -1,8 +1,8 @@
-"use client";
+import { use } from "react";
 
-import { useEffect, useState } from "react";
-import { usePathname } from "next/navigation";
-import { notFound } from "next/navigation";
+interface Params {
+  params: Promise<{ id: string }>;
+}
 
 interface Article {
   id: string;
@@ -12,28 +12,17 @@ interface Article {
   featuredImage: string;
 }
 
-export default function ArticleClient() {
-  const pathname = usePathname();
-  const id = pathname?.split("/").pop(); 
+async function fetchArticle(id: string): Promise<Article> {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/articles/${id}`, {
+    cache: "no-store",
+  });
+  if (!res.ok) throw new Error("Article not found");
+  return res.json();
+}
 
-  const [article, setArticle] = useState<Article | null>(null);
-  const [error, setError] = useState(false);
-
-  useEffect(() => {
-    if (!id) return;
-
-    fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/articles/${id}`)
-      .then((res) => {
-        if (!res.ok) throw new Error("Not found");
-        return res.json();
-      })
-      .then((data: Article) => setArticle(data))
-      .catch(() => setError(true));
-  }, [id]);
-
-  if (error) return notFound();
-
-  if (!article) return <div>Loading...</div>;
+export default function ArticlePage({ params }: Params) {
+  const { id } = use(params);
+  const article = use(fetchArticle(id));
 
   return (
     <div className="p-6 max-w-3xl mx-auto">

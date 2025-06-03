@@ -6,9 +6,8 @@ type ArticleCardProps = {
   id: string;
   title: string;
   content: string;
-  category: string;
-  featuredImage: string;
-
+  category?: string;          
+  featuredImage?: string;     
 };
 
 export default function ArticleCard({

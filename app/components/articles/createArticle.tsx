@@ -2,6 +2,7 @@
 
 import { articleSchema } from "@/app/lib/validators/articles";
 import React, { useState } from "react";
+import { ZodError } from "zod";
 
 type ArticleInput = Zod.infer<typeof articleSchema>;
 
@@ -15,7 +16,8 @@ export default  function CreateArticle() {
 
     });
 
-    const [errors, setErrors] = useState({})
+    const [errors, setErrors] = useState<Record<string, string[]>>({});
+
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         console.log(formData)
@@ -69,7 +71,7 @@ export default  function CreateArticle() {
                         placeholder="Article title"
                         type="text"
                     />
-                    {errors.title && <p className="text-red-600">{errors.title}</p>}
+                    {errors?.title && <p className="text-red-600">{errors.title}</p>}
                 </div>
 
                 <div>

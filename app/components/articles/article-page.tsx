@@ -8,7 +8,7 @@ type Article = {
   title: string;
   content: string;
   category?: string;
-  featuredImage?: string;
+  featuredImage: string;
 };
 
 function ArticlesPage() {

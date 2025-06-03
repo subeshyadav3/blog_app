@@ -69,16 +69,16 @@ export default function Dashboard() {
       setArticles(data)
 
  
-      const published = data.filter((article) => article.status === "published").length
-      const draft = data.filter((article) => article.status === "draft").length
-      const uniqueCategories = new Set(data.map((article) => article.category)).size
+      // const published = data.filter((article) => article.status === "published").length
+      // const draft = data.filter((article) => article.status === "draft").length
+      // const uniqueCategories = new Set(data.map((article) => article.category)).size
 
-      setStats({
-        total: data.length,
-        published,
-        draft,
-        categories: uniqueCategories,
-      })
+      // setStats({
+      //   total: data.length,
+      //   published,
+      //   draft,
+      //   categories: uniqueCategories,
+      // })
     } catch (err) {
       console.error("Error fetching articles:", err)
       setError("Failed to load articles. Please try again.")

@@ -1,10 +1,8 @@
 import prisma from "@/app/lib/prisma";
 import { NextRequest, NextResponse } from "next/server";
 
-export async function GET(request: NextRequest) {
-  const { pathname } = new URL(request.url);
-  const parts = pathname.split("/");
-  const id = parts[parts.length - 1];
+export async function GET(request: NextRequest, { params }: { params: { id: string } }) {
+  const { id } = params;
 
   try {
     const article = await prisma.articles.findUnique({
@@ -24,14 +22,12 @@ export async function GET(request: NextRequest) {
   }
 }
 
-export async function PUT(request: NextRequest) {
-  const { pathname } = new URL(request.url);
-  const parts = pathname.split("/");
-  const id = parts[parts.length - 1];
-  const article  = await request.json();
-  console.log(parts, id, article);
+export async function PUT(request: NextRequest, { params }: { params: { id: string } }) {
+  const { id } = params;
+  const article = await request.json();
+
   try {
-    const articleUpdated =  await prisma.articles.update({
+    const articleUpdated = await prisma.articles.update({
       where: { id },
       data: {
         title: article.title,
@@ -39,24 +35,20 @@ export async function PUT(request: NextRequest) {
         category: article.category,
         featuredImage: article.featuredImage,
         authorId: article.authorId,
-      
       },
     });
 
     return NextResponse.json(articleUpdated, { status: 200 });
   } catch (error) {
     return NextResponse.json(
-      { message: `Cannot Edit - Internal Servor Error ${error}` },
-      
+      { message: `Cannot Edit - Internal Server Error ${error}` },
       { status: 500 }
     );
   }
 }
 
-export async function DELETE(request: NextRequest) {
-  const { pathname } = new URL(request.url);
-  const parts = pathname.split("/");
-  const id = parts[parts.length - 1];
+export async function DELETE(request: NextRequest, { params }: { params: { id: string } }) {
+  const { id } = params;
 
   try {
     const article = await prisma.articles.delete({

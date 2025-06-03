@@ -1,3 +1,7 @@
+"use client";
+
+import { useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
 import { notFound } from "next/navigation";
 
 interface Article {
@@ -8,32 +12,39 @@ interface Article {
   featuredImage: string;
 }
 
-interface PageProps {
-  params: {
-    id: string;
-  };
-}
+export default function ArticleClient() {
+  const pathname = usePathname();
+  const id = pathname?.split("/").pop(); 
 
-export default async function ArticleDetails({ params }: PageProps) {
-  const { id } = params;
+  const [article, setArticle] = useState<Article | null>(null);
+  const [error, setError] = useState(false);
 
-  const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/articles/${id}`)
+  useEffect(() => {
+    if (!id) return;
 
+    fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/articles/${id}`)
+      .then((res) => {
+        if (!res.ok) throw new Error("Not found");
+        return res.json();
+      })
+      .then((data: Article) => setArticle(data))
+      .catch(() => setError(true));
+  }, [id]);
 
-  if (!res.ok) return notFound();
+  if (error) return notFound();
 
-  const data: Article = await res.json();
+  if (!article) return <div>Loading...</div>;
 
   return (
     <div className="p-6 max-w-3xl mx-auto">
       <img
-        src={data.featuredImage}
-        alt={data.title}
+        src={article.featuredImage}
+        alt={article.title}
         className="w-full h-64 object-cover mb-6 rounded-lg"
       />
-      <h1 className="text-3xl font-bold mb-2">{data.title}</h1>
-      <p className="text-sm text-gray-500 mb-4">#{data.category}</p>
-      <p className="text-lg text-gray-800 whitespace-pre-line">{data.content}</p>
+      <h1 className="text-3xl font-bold mb-2">{article.title}</h1>
+      <p className="text-sm text-gray-500 mb-4">#{article.category}</p>
+      <p className="text-lg text-gray-800 whitespace-pre-line">{article.content}</p>
     </div>
   );
 }

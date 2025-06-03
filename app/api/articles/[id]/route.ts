@@ -28,18 +28,26 @@ export async function PUT(request: NextRequest) {
   const { pathname } = new URL(request.url);
   const parts = pathname.split("/");
   const id = parts[parts.length - 1];
-  const data = await request.json();
-
+  const article  = await request.json();
+  console.log(parts, id, article);
   try {
-    const article = await prisma.articles.update({
+    const articleUpdated =  await prisma.articles.update({
       where: { id },
-      data,
+      data: {
+        title: article.title,
+        content: article.content,
+        category: article.category,
+        featuredImage: article.featuredImage,
+        authorId: article.authorId,
+      
+      },
     });
 
-    return NextResponse.json(article, { status: 200 });
+    return NextResponse.json(articleUpdated, { status: 200 });
   } catch (error) {
     return NextResponse.json(
-      { message: "Internal Server Error" },
+      { message: `Cannot Edit - Internal Servor Error ${error}` },
+      
       { status: 500 }
     );
   }

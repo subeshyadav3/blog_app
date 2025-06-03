@@ -29,7 +29,7 @@ function ArticlesPage() {
 
   const totalPages = Math.max(1, Math.ceil(articles.length / pageSize));
 
-  const handlePageChange = (newPage) => {
+  const handlePageChange = (newPage:number) => {
     if (newPage >= 1 && newPage <= totalPages) {
       setPage(newPage);
       window.scrollTo({ top: 0, behavior: 'smooth' }); 

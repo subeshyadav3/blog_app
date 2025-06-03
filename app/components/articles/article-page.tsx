@@ -23,7 +23,7 @@ function ArticlesPage() {
         setLoading(true);
         const res = await fetch('/api/articles');
         if (!res.ok) throw new Error('Failed to fetch articles');
-        const data: Article[] = await res.json();
+        const data: Article[]  = await res.json();
         setArticles(data);
       } catch (error) {
         console.error('Error fetching articles:', error);

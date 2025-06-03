@@ -23,7 +23,7 @@ export default function ArticleCard({
       <div className="rounded-2xl shadow-md overflow-hidden transition hover:scale-105 max-w-sm bg-white cursor-pointer">
         <div className="h-40 w-full relative">
           <Image
-            src={featuredImage}
+            src={featuredImage ?? "/placeholder.jpg"} 
             alt={title}
             fill
             className="object-cover"

@@ -6,7 +6,7 @@ import ArticleCard from '../articles/article-card';
 type Blog = {
   id: string;
   title: string;
-  content: string;
+  excerpt: string;
   category: string;
   featuredImage: string;
 };
@@ -53,7 +53,7 @@ function RecentBlog() {
                     key={item.id}
                     id={item.id}
                     title={item.title}
-                    content={item.content}
+                    excerpt={item.excerpt}
                     category={item.category}
                     featuredImage={item.featuredImage}
                   />

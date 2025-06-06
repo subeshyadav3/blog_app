@@ -10,12 +10,10 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-import { Textarea } from "@/components/ui/textarea"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
 
-
-
+import BlogEditor from "@/app/components/editor/quillEditor"
 
 export default function CreateArticle() {
   const router = useRouter()
@@ -52,13 +50,13 @@ export default function CreateArticle() {
         },
         body: JSON.stringify(formData),
       })
-      alert("Article created successfully! Redirecting to dashboard...")
 
       if (!response.ok) {
-      alert("Failed to create article. Please try again.")
+        alert("Failed to create article. Please try again.")
         throw new Error("Failed to create article")
       }
 
+      alert("Article created successfully! Redirecting to dashboard...")
       router.push("/dashboard")
     } catch (err) {
       console.error("Error creating article:", err)
@@ -106,7 +104,7 @@ export default function CreateArticle() {
             </div>
 
             <div className="space-y-2">
-            <Label htmlFor="title">Featured Image</Label>
+              <Label htmlFor="featuredImage">Featured Image</Label>
               <Input
                 id="featuredImage"
                 name="featuredImage"
@@ -119,7 +117,7 @@ export default function CreateArticle() {
 
             <div className="space-y-2">
               <Label htmlFor="excerpt">Excerpt</Label>
-              <Textarea
+              <textarea
                 id="excerpt"
                 name="excerpt"
                 placeholder="Brief summary of the article"
@@ -127,19 +125,15 @@ export default function CreateArticle() {
                 onChange={handleChange}
                 required
                 rows={3}
+                className="w-full rounded-md border border-gray-300 p-2"
               />
             </div>
 
             <div className="space-y-2">
               <Label htmlFor="content">Content</Label>
-              <Textarea
-                id="content"
-                name="content"
-                placeholder="Full article content"
+              <BlogEditor
                 value={formData.content}
-                onChange={handleChange}
-                required
-                rows={10}
+                onChange={(value: string) => setFormData((prev) => ({ ...prev, content: value }))}
               />
             </div>
 
@@ -168,7 +162,11 @@ export default function CreateArticle() {
 
               <div className="space-y-2">
                 <Label htmlFor="status">Status</Label>
-                <Select value={formData.status} onValueChange={(value) => handleSelectChange("status", value)} required>
+                <Select
+                  value={formData.status}
+                  onValueChange={(value) => handleSelectChange("status", value)}
+                  required
+                >
                   <SelectTrigger id="status">
                     <SelectValue placeholder="Select status" />
                   </SelectTrigger>
@@ -180,6 +178,7 @@ export default function CreateArticle() {
               </div>
             </div>
           </CardContent>
+
           <CardFooter className="flex justify-between">
             <Button variant="outline" type="button" onClick={() => router.push("/dashboard")}>
               Cancel

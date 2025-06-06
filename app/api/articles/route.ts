@@ -31,12 +31,15 @@ export async function POST(request: NextRequest) {
         content: article.content,
         category: article.category,
         featuredImage: article.featuredImage,
+        excerpt: article.excerpt,
+        status: article.status || "draft",
         authorId: userExist?.id || article.authorId,
       },
     });
 
     return NextResponse.json(newArticle, { status: 201 });
   } catch (error) {
+    console.log("Error creating article:", error);
     return NextResponse.json(
       { message: "Internal Server Error" },
       { status: 500 }

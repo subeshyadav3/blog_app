@@ -8,25 +8,24 @@ datasource db {
 }
 
 model User {
-  id          String     @id @default(cuid())
-  clerkId  String   @unique 
-  email       String     @unique
-  name        String
-  imageUrl    String?
-  role        String?
-  articles    Articles[]
+  id       String     @id @default(cuid())
+  clerkId  String     @unique
+  email    String     @unique
+  name     String
+  imageUrl String?
+  role     String?
+  articles Articles[]
 }
-
-
 
 model Articles {
-  id String @id @default(cuid())
-  title String
-  content String
-  category String
+  id            String   @id @default(cuid())
+  title         String
+  content       String
+  excerpt       String
+  status        String
+  category      String
   featuredImage String
-  author User @relation(fields:[authorId],references: [id])
-  authorId String
-  createdAt DateTime @default(now())
+  author        User     @relation(fields: [authorId], references: [id])
+  authorId      String
+  createdAt     DateTime @default(now())
 }
-

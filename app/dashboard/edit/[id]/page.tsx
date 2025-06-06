@@ -8,9 +8,10 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-import { Textarea } from "@/components/ui/textarea"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
+
+import BlogEditor from "@/app/components/editor/quillEditor"
 
 interface Article {
   id: string
@@ -45,7 +46,6 @@ export default function EditArticle({ params }: { params: Promise<{ id: string }
     updatedAt: "",
   })
 
-  
   useEffect(() => {
     const fetchArticle = async () => {
       setIsLoading(true)
@@ -84,7 +84,7 @@ export default function EditArticle({ params }: { params: Promise<{ id: string }
     e.preventDefault()
     setIsSubmitting(true)
     setError(null)
-
+    console.log("Updating article:", formData)
     try {
       const response = await fetch(`/api/articles/${id}`, {
         method: "PUT",
@@ -158,7 +158,7 @@ export default function EditArticle({ params }: { params: Promise<{ id: string }
 
             <div className="space-y-2">
               <Label htmlFor="excerpt">Excerpt</Label>
-              <Textarea
+              <textarea
                 id="excerpt"
                 name="excerpt"
                 placeholder="Brief summary of the article"
@@ -166,19 +166,15 @@ export default function EditArticle({ params }: { params: Promise<{ id: string }
                 onChange={handleChange}
                 required
                 rows={3}
+                className="w-full rounded-md border border-gray-300 p-2"
               />
             </div>
 
             <div className="space-y-2">
               <Label htmlFor="content">Content</Label>
-              <Textarea
-                id="content"
-                name="content"
-                placeholder="Full article content"
+              <BlogEditor
                 value={formData.content}
-                onChange={handleChange}
-                required
-                rows={10}
+                onChange={(content) => setFormData(prev => ({ ...prev, content }))}
               />
             </div>
 

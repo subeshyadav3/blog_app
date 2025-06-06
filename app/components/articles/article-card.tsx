@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 type ArticleCardProps = {
   id: string;
   title: string;
-  content: string;
+  excerpt: string;
   category?: string;          
   featuredImage?: string;     
 };
@@ -13,7 +13,7 @@ type ArticleCardProps = {
 export default function ArticleCard({
   id,
   title,
-  content,
+  excerpt,
   category,
   featuredImage,
 
@@ -33,7 +33,8 @@ export default function ArticleCard({
 
         <div className="p-4">
           <h2 className="text-lg font-bold text-gray-900 mb-1">{title}</h2>
-          <p className="text-sm text-gray-600 line-clamp-4 mb-2">{content}</p>
+          
+          <p className="text-sm text-gray-600 line-clamp-4 mb-2">{excerpt}</p>
 
           <div className="flex items-center justify-between mt-4">
             <span className="text-sm text-primary font-medium">#{category}</span>

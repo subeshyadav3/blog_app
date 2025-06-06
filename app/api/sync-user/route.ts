@@ -26,7 +26,7 @@ export async function POST(request: Request) {
                 role,
             },
         });
-
+        console.log("New user created:", newUser);
         return NextResponse.json({ message: "User synced.", user: newUser }, { status: 201 });
 
     } catch (error) {

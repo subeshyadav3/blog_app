@@ -37,6 +37,8 @@ export async function PUT(request: NextRequest) {
         title: article.title,
         content: article.content,
         category: article.category,
+        excerpt: article.excerpt,
+        status: article.status || "draft",
         featuredImage: article.featuredImage,
         authorId: article.authorId,
       

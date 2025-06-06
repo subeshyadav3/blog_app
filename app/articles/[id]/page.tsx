@@ -33,7 +33,10 @@ export default function ArticlePage({ params }: Params) {
       />
       <h1 className="text-3xl font-bold mb-2">{article.title}</h1>
       <p className="text-sm text-gray-500 mb-4">#{article.category}</p>
-      <p className="text-lg text-gray-800 whitespace-pre-line">{article.content}</p>
+      <div
+        className="prose max-w-full text-gray-800"
+        dangerouslySetInnerHTML={{ __html: article.content }}
+      />
     </div>
   );
 }

@@ -6,8 +6,8 @@ import ArticleCard from '../articles/article-card';
 type Article = {
   id: string;
   title: string;
-  content: string;
   category?: string;
+  excerpt: string;
   featuredImage: string;
 };
 
@@ -60,8 +60,8 @@ function ArticlesPage() {
                   key={item.id}
                   id={item.id}
                   title={item.title}
-                  content={item.content}
-                  category={item.category}
+                  excerpt={item.excerpt }
+                  category={item.category ?? "Uncategorized"}
                   featuredImage={item.featuredImage}
                 />
               ))

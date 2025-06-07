@@ -1,15 +1,17 @@
 import { Badge } from "@/components/ui/badge"
 import { Card, CardContent } from "@/components/ui/card"
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel"
+import { useRouter } from "next/navigation"
 
 export function ImageSlider() {
-
+  const router= useRouter()
   const featuredPosts = [
     {
       id: 1,
       title: "Nothing Phone (3a) Pro review:",
       category: "mobile",
       date: "May 20, 2025",
+      link:"/articles/cmbkz7rjl0001ji04ck12hxpf",
       image: "https://cdn.gadgetbytenepal.com/wp-content/uploads/2025/04/Nothing-Phone-3a-Pro-Design.jpg",
     },
     {
@@ -17,14 +19,16 @@ export function ImageSlider() {
       title: "Honor X8C Review:",
       category: "mobile",
       date: "May 20, 2025",
+      link:"/articles/cmbkzayz80003ji04fmey9m84",
       image: "https://cdn.gadgetbytenepal.com/wp-content/uploads/2025/04/Honor-X8c-Design.jpg",
     },
     {
       id: 3,
-      title: "Nothing Phone (3a) Pro review:",
-      category: "mobile",
+      title: "Acer Nitro V 2023",
+      category: "Web Development",
       date: "May 20, 2025",
-      image: "https://cdn.gadgetbytenepal.com/wp-content/uploads/2025/04/Nothing-Phone-3a-Pro-Design.jpg",
+      link:"/articles/cmbkzpdmw0003k004ob54l946",
+      image: "https://cdn.gadgetbytenepal.com/wp-content/uploads/2023/09/Acer-Nitro-V-design.jpg",
     }
   ]
 
@@ -33,7 +37,11 @@ export function ImageSlider() {
     <Carousel className="w-full">
       <CarouselContent>
         {featuredPosts.map((post) => (
-          <CarouselItem key={post.id}>
+          <CarouselItem key={post.id} 
+            className="cursor-pointer"
+          onClick={()=> 
+            router.push(post.link)
+          }>
             <div className="p-1">
               <Card className="overflow-hidden border-0 shadow-none">
                 <CardContent className="p-0">

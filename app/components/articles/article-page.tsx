@@ -70,7 +70,7 @@ function ArticlesPage() {
                   key={index}
                   className="shadow-lg rounded-t-lg mt-10 animate-pulse w-full py-2"
                 >
-                  {/* Skeleton loader */}
+             
                   <div className="h-32 bg-gray-300 rounded-t-lg" />
                   <div className="mt-2 px-2 space-y-2">
                     <div className="h-5 bg-gray-300 rounded w-3/4" />

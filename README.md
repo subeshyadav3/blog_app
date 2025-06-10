@@ -14,11 +14,6 @@ A **full-featured blog application** built with the **Next.js** framework. This 
 |---------------------------------|-------------------------------|
 | ![Post](docs/images/blog2.png)  | ![Dashboard](docs/images/blog3.png) |
 
-
-> 💡 To add screenshots:
-> - Drag and drop your images into a GitHub issue or PR comment.
-> - Copy the Markdown image link and replace the placeholders above.
-
 ---
 
 ## 🚀 Features

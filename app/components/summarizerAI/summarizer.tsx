@@ -24,6 +24,7 @@ type Summary={
   price: string;
   
 }
+
 export default function Summarizer({content}: { content: string }) {
 
     const [summary, setSummary] = useState<Summary | null>(null);
@@ -64,7 +65,7 @@ export default function Summarizer({content}: { content: string }) {
         <DrawerTrigger
           className="
          
-            absolute right-5 z-50 w-10 h-10 rounded-full animate-spin  hover:animate-none bg-violet-500 text-white flex items-center justify-center
+            absolute right-5 mt-10 sm:mt-0 z-50 w-10 h-10 rounded-full animate-spin  hover:animate-none bg-violet-500 text-white flex items-center justify-center
             before:content-[''] before:absolute before:inset-0 before:rounded-full before:bg-violet-400/50
             before:animate-ping before:-z-10
           "
@@ -72,16 +73,16 @@ export default function Summarizer({content}: { content: string }) {
           AI
         </DrawerTrigger>
       
-        <DrawerContent className="mx-5 mb-2">
-        <DrawerClose className="absolute right-0">
+        <DrawerContent className="mx-5 mb-2 ">
+        <DrawerClose className="absolute right-0  ">
               <X className=" w-6 h-6 m-2 " />
             </DrawerClose>
           <DrawerHeader>
             <DrawerTitle>Post Summarizer</DrawerTitle>
             <DrawerDescription>Bored of reading entire post, We can summarize it.</DrawerDescription>
           </DrawerHeader>
-          <div className="px-5 ">
-            <div className="flex flex-col space-y-4 overflow-y-scroll">
+          <div className="px-5  overflow-y-auto ">
+            <div className="flex flex-col space-y-4   ">
               {summary ? (
                 <div className="space-y-2">
                   <h3 className="text-lg font-semibold">Summary</h3>
@@ -103,8 +104,8 @@ export default function Summarizer({content}: { content: string }) {
                 </div>
               ) : ""}
             </div>
-          </div>
-
+             </div>
+             
 
           <DrawerFooter>
            {summary ? "":(

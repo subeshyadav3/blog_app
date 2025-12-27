@@ -1,12 +1,10 @@
 import type { NextConfig } from "next";
 
-const nextConfig: NextConfig = {
+const nextConfig: NextConfig & { eslint?: any } = {
   images: {
-    domains: ['cdn.gadgetbytenepal.com'],
+    domains: ["cdn.gadgetbytenepal.com"],
   },
   eslint: {
-    // This allows production builds to successfully complete even if
-    // your project has ESLint errors.
     ignoreDuringBuilds: true,
   },
 };

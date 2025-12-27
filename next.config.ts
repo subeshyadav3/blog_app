@@ -1,9 +1,7 @@
 import type { NextConfig } from "next";
 
-const nextConfig: NextConfig = {
-  images: {
-    domains: ['cdn.gadgetbytenepal.com'], 
-  },
+// next.config.js
+const nextConfig = {
   eslint: {
     ignoreDuringBuilds: true,
   },
